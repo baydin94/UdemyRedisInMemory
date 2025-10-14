@@ -54,7 +54,7 @@ namespace IDistributedCacheRedisApp.Web.Controllers
 
             _distributedCache.Set("product:3", byteProduct, options);
 
-            return Content("Ürünler redise kaydedildi.");
+            return View();
         }
 
         public IActionResult Show()
@@ -79,6 +79,24 @@ namespace IDistributedCacheRedisApp.Web.Controllers
         {
             _distributedCache.Remove("name");
             return View();
+        }
+
+        public IActionResult ImageCache()
+        {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", "download.jpg");
+
+            byte[] imageByte = System.IO.File.ReadAllBytes(path);
+
+            _distributedCache.Set("image",imageByte);            
+
+            return View();
+        }
+
+        public IActionResult ImageUrl()
+        {
+            byte[] imageByte = _distributedCache.Get("image");
+
+            return File(imageByte, "image/jpg");
         }
     }
 }
