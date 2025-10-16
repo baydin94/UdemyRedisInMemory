@@ -6,6 +6,12 @@ namespace StackExchange.RedisAPI.Web.Controllers
     public class SetTypeController : Controller
     {
         private readonly RedisService _redisService;
+
+        public SetTypeController(RedisService redisService)
+        {
+            _redisService = redisService;
+        }
+
         private string listKey = "hostnames";
         public IActionResult Index()
         {
