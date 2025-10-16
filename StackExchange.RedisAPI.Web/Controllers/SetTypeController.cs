@@ -21,7 +21,7 @@ namespace StackExchange.RedisAPI.Web.Controllers
             if (db.KeyExists(listKey))
                 db.SetMembers(listKey).ToList().ForEach(x => namesList.Add(x.ToString()));
 
-            return View();
+            return View(namesList);
         }
 
         [HttpPost]
@@ -35,9 +35,6 @@ namespace StackExchange.RedisAPI.Web.Controllers
 
             return RedirectToAction("Index");
         }
-
-
-
 
     }
 }
