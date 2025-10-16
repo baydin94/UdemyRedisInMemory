@@ -1,0 +1,18 @@
+﻿@model List<string>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<a asp-action="RemoveFirstItem">BAŞTAN SİL</a>
+
+<form method="post" asp-action="AddList" enctype="application/x-www-form-urlencoded">
+    <input type="text" name="name"/>
+    <button type="submit">Kaydet</button>
+</form>
+
+
+@foreach (var item in Model)
+{
+    <h2>@item <a asp-controller="ListType" asp-action="RemoveItem" asp-route-name="@item">SİL</a></h2>
+}    
